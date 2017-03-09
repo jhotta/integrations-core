@@ -9,9 +9,10 @@ instances:
   # and fs metrics using mount points instead of volumes
   - use_mount: no
     # The (optional) excluded_filesystems parameter will instruct the check to
-    # ignore disks using these filesystems
-    # excluded_filesystems:
-    #   - tmpfs
+    # ignore disks using these filesystems, rootfs is excluded by default.
+    excluded_filesystems:
+      - rootfs
+    #  - tmpfs
 
     # The (optional) excluded_disks parameter will instruct the check to
     # ignore this list of disks
