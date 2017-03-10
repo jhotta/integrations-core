@@ -84,3 +84,6 @@ tmp
 # OS Specific
 *.DS_Store
 *.fuse_hidden*
+
+# ruby environment related
+*.ruby-version
