@@ -80,3 +80,53 @@ task dd_agent_consistency: [:pull_latest_agent] do
     find_inconsistencies(find_yaml_confs, 'conf.d')
   )
 end
+
+
+## Only related to JP docs mantanace:
+
+def create_readme(integration, tlang)
+  payload = "this is a " + integration + "."
+  file_name = "README-ja-" + integration +".txt"
+  if File.exist?(file_name) then
+    print("file exists: ", file_name, "\n")
+  else
+    print("writing to: ", file_name, "\n")
+    a = translate_text(payload, tlang)
+    p a
+    File.open(file_name, "a") do |f|
+      f.puts(a + "\n")
+    end
+  end
+end
+
+def translate_text(payload, tlang)
+  query = "trans {en:" + tlang + "} -no-auto -b '" + payload + " '"
+  p query
+  return `#{query}`
+end
+
+desc 'generate README-ja.md'
+task :jreadme do
+  lang = "ja"
+  integration = "yarn"
+  create_readme(integration, lang)
+  # dirs = Dir.glob("*")
+  # dirs.each{|integration|
+  #   if File::ftype(integration) == "directory"
+  #     create_readme(integration, lang)
+  #   end 
+  # }
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
